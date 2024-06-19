@@ -47,30 +47,39 @@ class LinkList {
 
     size () {
         let size = 0;
-        let endReach = false;
         let tempList = this.linkList.link;
 
         if (typeof tempList === 'undefined') {
             return size;
         }
 
-        while (! endReach) {
-            if (tempList.link === null) {
-                size += 1;
-                endReach = true;
-                return size;
-            };
-
+        while (! (tempList.link === null)) {
             tempList = tempList.link;
             size += 1;
-        }
-    }
+        };
 
-}
+        size += 1;
+        return size
+    };
+
+    head () {
+        return this.linkList.link;
+    };
+
+    tail () {
+        let tempList = this.linkList.link;
+
+        while (! (tempList.link === null)) {
+            tempList = tempList.link;
+        };
+
+        return tempList;
+    };
+
+};
 
 const link = new LinkList();
 link.append(3);
-link.append(10);
-link.prepend(8);
 link.prepend(12);
-console.log(link.size());
+link.append(45);
+console.log(link.tail());

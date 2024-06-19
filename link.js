@@ -180,12 +180,58 @@ class LinkList {
         finalString += `(${tempList.value}) -> null`
 
         return finalString;
-    }
+    };
+
+    insertAt(value, index) {
+        let loc = this.size();
+
+        if ((index < 0) || (index > loc) ) {
+            return "Index out of Range";
+        } else if (index === 0) {
+            this.prepend(value);
+        } else if (index === loc){
+            this.append(value);
+        } else {
+            let tempList = this.linkList.link;
+            let newlist = new Node();
+            let tempListNew = newlist;
+
+            for (let i=0; i<loc; i++) {
+                if (i === index){
+                    const node = new Node()
+                    node.value = value;
+                    tempListNew.link = node;
+                    tempListNew = tempListNew.link
+                }
+
+                if (i === 0) {
+                    tempListNew.value = tempList.value;
+                    tempList = tempList.link;
+                } else {
+                    const node = new Node();
+                    node.value = tempList.value;
+                    tempListNew.link = node;
+                    tempList = tempList.link;
+                    tempListNew = tempListNew.link
+                }
+                
+            };
+    
+            this.linkList.link = newlist;
+        };
+    };
 };
 
 const link = new LinkList();
-const link2 = new LinkList()
 link.append(3);
 link.prepend(12);
-link.append(45);
-console.log(link2.toString());
+link.append(32);
+link.append(1);
+link.prepend(56);
+
+console.log(link.linkList);
+console.log(link.size());
+link.insertAt(4,2)
+console.log(link.linkList);
+console.log(link.tail());
+console.log(link.size())

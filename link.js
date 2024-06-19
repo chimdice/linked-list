@@ -45,6 +45,27 @@ class LinkList {
         };
     };
 
+    size () {
+        let size = 0;
+        let endReach = false;
+        let tempList = this.linkList.link;
+
+        if (typeof tempList === 'undefined') {
+            return size;
+        }
+
+        while (! endReach) {
+            if (tempList.link === null) {
+                size += 1;
+                endReach = true;
+                return size;
+            };
+
+            tempList = tempList.link;
+            size += 1;
+        }
+    }
+
 }
 
 const link = new LinkList();
@@ -52,4 +73,4 @@ link.append(3);
 link.append(10);
 link.prepend(8);
 link.prepend(12);
-console.log(link.linkList);
+console.log(link.size());

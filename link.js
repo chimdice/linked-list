@@ -137,13 +137,55 @@ class LinkList {
 
 
     find (value) {
-        
+        let tempList = this.linkList.link;
+        let inList = false
+        let valueIndex = 0;
+
+        if ((typeof tempList === 'undefined')||(tempList === null)) {
+            return null;
+        }
+
+        while (! inList) {
+            if (tempList.value === value) {
+                inList = true;
+            } else if (tempList.link === null) {
+                break;
+            } else {
+                tempList = tempList.link;
+                valueIndex += 1;
+            };
+        };
+
+        if (inList) {
+            return valueIndex;
+        } else {
+            return null
+        }
+    };
+
+    toString () {
+        let finalString = '';
+
+        let tempList = this.linkList.link;
+
+        if ((typeof tempList === 'undefined')||(tempList === null)) {
+            return finalString;
+        }
+
+        while (! (tempList.link === null)) {
+            finalString += `(${tempList.value}) ->`
+            tempList = tempList.link;
+        };
+
+        finalString += `(${tempList.value}) -> null`
+
+        return finalString;
     }
 };
 
 const link = new LinkList();
+const link2 = new LinkList()
 link.append(3);
 link.prepend(12);
 link.append(45);
-console.log(link.linkList)
-console.log(link.contains(45));
+console.log(link2.toString());

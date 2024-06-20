@@ -220,18 +220,41 @@ class LinkList {
             this.linkList.link = newlist;
         };
     };
+
+    removeAt(index) {
+        let loc = this.size();
+
+        if ((index < 0) || (index > loc-1) ) {
+            return "Index out of Range";
+        } else if (index === loc-1) {
+            this.pop();
+        } else {
+            let tempList = this.linkList.link;
+            let newlist = new Node();
+            let tempListNew = newlist;
+            let start = true;
+
+            for (let i=0; i<loc; i++) {
+                if (! (i === index)){
+                   if (start) {
+                        tempListNew.value = tempList.value;
+                        console.log(tempList.value)
+                        tempList = tempList.link;
+                        start = false;
+                    } else {
+                        const node = new Node();
+                        node.value = tempList.value;
+                        console.log(tempList.value)
+                        tempListNew.link = node;
+                        tempList = tempList.link;
+                        tempListNew = tempListNew.link
+                    };
+                } else {
+                    tempList = tempList.link;
+                };
+            };
+
+            this.linkList.link = newlist;
+        };
+    };
 };
-
-const link = new LinkList();
-link.append(3);
-link.prepend(12);
-link.append(32);
-link.append(1);
-link.prepend(56);
-
-console.log(link.linkList);
-console.log(link.size());
-link.insertAt(4,2)
-console.log(link.linkList);
-console.log(link.tail());
-console.log(link.size())
